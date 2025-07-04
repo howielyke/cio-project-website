@@ -1,0 +1,60 @@
+
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+    binaryTargets = ["native", "linux-musl-arm64-openssl-3.0.x"]
+    output = "/home/ubuntu/cio-project-bulletproof/app/node_modules/.prisma/client"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model Episode {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  guest       String
+  guestBio    String?
+  guestPhoto  String?
+  description String
+  audioUrl    String?
+  duration    String?
+  category    String
+  publishDate DateTime
+  showNotes   String?
+  featured    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("episodes")
+}
+
+model Contact {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  subject   String
+  message   String
+  formType  String   @default("general")
+  status    String   @default("new")
+  createdAt DateTime @default(now())
+
+  @@map("contacts")
+}
+
+model Sponsor {
+  id          String   @id @default(cuid())
+  name        String
+  logo        String
+  website     String
+  tier        String   @default("gold")
+  description String?
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+
+  @@map("sponsors")
+}
