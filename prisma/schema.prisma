@@ -1,0 +1,56 @@
+
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+    binaryTargets = ["native", "linux-musl-arm64-openssl-3.0.x"]
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model Sponsor {
+  id          String   @id @default(cuid())
+  name        String
+  email       String
+  company     String
+  title       String?
+  message     String?
+  budget      String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("sponsors")
+}
+
+model Episode {
+  id           String   @id @default(cuid())
+  title        String
+  description  String?
+  episodeNumber Int
+  youtubeId    String?
+  audioUrl     String?
+  guests       String[] @default([])
+  showNotes    String?
+  publishedAt  DateTime
+  featured     Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("episodes")
+}
+
+model AudienceInquiry {
+  id          String   @id @default(cuid())
+  name        String
+  email       String
+  inquiryType String
+  message     String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("audience_inquiries")
+}
