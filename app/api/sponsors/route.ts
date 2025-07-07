@@ -3,8 +3,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 import { Resend } from 'resend';
 
-const prisma = new PrismaClient();
-
 // Initialize Resend only if API key is available
 let resend: Resend | null = null;
 if (process.env.RESEND_API_KEY) {
@@ -13,7 +11,13 @@ if (process.env.RESEND_API_KEY) {
 
 export const dynamic = 'force-dynamic';
 
+function getPrismaClient() {
+  return new PrismaClient();
+}
+
 export async function POST(request: NextRequest) {
+  const prisma = getPrismaClient();
+  
   try {
     const body = await request.json();
     const { name, email, company, title, message, budget } = body;
@@ -121,10 +125,14 @@ export async function POST(request: NextRequest) {
       { error: 'Internal server error' },
       { status: 500 }
     );
+  } finally {
+    await prisma.$disconnect();
   }
 }
 
 export async function GET() {
+  const prisma = getPrismaClient();
+  
   try {
     const sponsors = await prisma.sponsor.findMany({
       orderBy: {
@@ -139,5 +147,7 @@ export async function GET() {
       { error: 'Internal server error' },
       { status: 500 }
     );
+  } finally {
+    await prisma.$disconnect();
   }
 }
