@@ -95,13 +95,6 @@ export function HeroSection() {
                   className="object-cover"
                   priority
                 />
-                
-                {/* Play overlay for trailer */}
-                <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
-                  <div className="w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center">
-                    <Play className="h-10 w-10 text-white ml-1" />
-                  </div>
-                </div>
               </div>
               
               {/* Floating elements */}
