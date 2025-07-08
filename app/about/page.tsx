@@ -132,7 +132,7 @@ export default function AboutPage() {
       </section>
 
       {/* Meet the Hosts */}
-      <section className="py-16 bg-gray-50">
+      <section id="meet-the-hosts" className="py-16 bg-gray-50">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-12">
             <div className="space-y-4">

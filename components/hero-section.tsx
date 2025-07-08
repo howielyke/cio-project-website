@@ -67,13 +67,17 @@ export function HeroSection() {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="show-trailer-highlight text-white font-semibold text-lg px-8 py-4">
-                <Youtube className="h-5 w-5 mr-2" />
-                Watch Show Trailer
+              <Button size="lg" className="show-trailer-highlight text-white font-semibold text-lg px-8 py-4" asChild>
+                <a href="#watch-show-trailer">
+                  <Youtube className="h-5 w-5 mr-2" />
+                  Watch Show Trailer
+                </a>
               </Button>
-              <Button size="lg" className="show-trailer-highlight text-amber-400 font-semibold text-lg px-8 py-4">
-                <Users className="h-5 w-5 mr-2" />
-                Meet the Hosts
+              <Button size="lg" className="show-trailer-highlight text-amber-400 font-semibold text-lg px-8 py-4" asChild>
+                <a href="/about#meet-the-hosts">
+                  <Users className="h-5 w-5 mr-2" />
+                  Meet the Hosts
+                </a>
               </Button>
             </div>
           </motion.div>
@@ -119,6 +123,7 @@ export function HeroSection() {
 
         {/* Show Trailer Prominent Section */}
         <motion.div
+          id="watch-show-trailer"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
