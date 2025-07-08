@@ -71,7 +71,7 @@ export function HeroSection() {
                 <Youtube className="h-5 w-5 mr-2" />
                 Watch Show Trailer
               </Button>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-red-600 px-8 py-4">
+              <Button size="lg" className="show-trailer-highlight text-amber-400 font-semibold text-lg px-8 py-4">
                 <Users className="h-5 w-5 mr-2" />
                 Meet the Hosts
               </Button>
@@ -170,4 +170,3 @@ export function HeroSection() {
     </section>
   );
 }
-

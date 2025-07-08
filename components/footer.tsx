@@ -3,7 +3,7 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Podcast, Linkedin, Youtube, Twitter } from 'lucide-react';
+import { Podcast, Linkedin, Youtube, Music, Apple } from 'lucide-react';
 
 export function Footer() {
   return (
@@ -48,25 +48,40 @@ export function Footer() {
             <h3 className="font-semibold text-lg">Connect</h3>
             <div className="flex space-x-4">
               <motion.a
-                href="#"
+                href="https://www.linkedin.com/showcase/105979474/admin/dashboard/"
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.1 }}
                 className="flex items-center justify-center w-10 h-10 rounded-lg bg-gray-800 hover:bg-amber-500 transition-colors"
               >
                 <Linkedin className="h-5 w-5" />
               </motion.a>
               <motion.a
-                href="#"
+                href="https://www.youtube.com/@theCIOProject/videos"
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.1 }}
                 className="flex items-center justify-center w-10 h-10 rounded-lg bg-gray-800 hover:bg-amber-500 transition-colors"
               >
                 <Youtube className="h-5 w-5" />
               </motion.a>
               <motion.a
-                href="#"
+                href="https://podcasts.apple.com/us/podcast/the-cio-project/id1800079926"
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.1 }}
                 className="flex items-center justify-center w-10 h-10 rounded-lg bg-gray-800 hover:bg-amber-500 transition-colors"
               >
-                <Twitter className="h-5 w-5" />
+                <Apple className="h-5 w-5" />
+              </motion.a>
+              <motion.a
+                href="https://open.spotify.com/show/706zX0WbNnJuoyTcrLw59z?si=7da97599ad434e30"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.1 }}
+                className="flex items-center justify-center w-10 h-10 rounded-lg bg-gray-800 hover:bg-amber-500 transition-colors"
+              >
+                <Music className="h-5 w-5" />
               </motion.a>
             </div>
             <p className="text-gray-400 text-sm">

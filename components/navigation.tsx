@@ -55,9 +55,11 @@ export function Navigation() {
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-500 group-hover:w-full transition-all duration-300" />
               </Link>
             ))}
-            <Button size="sm" className="bg-red-600 hover:bg-red-700 text-white">
-              Listen Now
-            </Button>
+            <Link href="/latest">
+              <Button size="sm" className="bg-red-600 hover:bg-red-700 text-white">
+                Listen Now
+              </Button>
+            </Link>
           </nav>
 
           {/* Mobile menu button */}
@@ -91,9 +93,11 @@ export function Navigation() {
                 </Link>
               ))}
               <div className="px-3 py-2">
-                <Button size="sm" className="w-full bg-red-600 hover:bg-red-700 text-white">
-                  Listen Now
-                </Button>
+                <Link href="/latest">
+                  <Button size="sm" className="w-full bg-red-600 hover:bg-red-700 text-white" onClick={() => setIsOpen(false)}>
+                    Listen Now
+                  </Button>
+                </Link>
               </div>
             </nav>
           </motion.div>

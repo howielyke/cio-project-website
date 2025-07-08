@@ -1,6 +1,7 @@
 
 import { HostProfile } from '@/components/host-profile';
 import { Quote, Mic, Users, Target } from 'lucide-react';
+import Link from 'next/link';
 
 const hosts = [
   {
@@ -207,12 +208,12 @@ export default function AboutPage() {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-blue-900 hover:bg-blue-800 text-white px-8 py-3 rounded-lg font-medium transition-colors">
+            <Link href="/latest" className="bg-blue-900 hover:bg-blue-800 text-white px-8 py-3 rounded-lg font-medium transition-colors inline-block text-center">
               Listen to Latest Episode
-            </button>
-            <button className="border border-blue-900 text-blue-900 hover:bg-blue-900 hover:text-white px-8 py-3 rounded-lg font-medium transition-colors">
+            </Link>
+            <Link href="/episodes" className="border border-blue-900 text-blue-900 hover:bg-blue-900 hover:text-white px-8 py-3 rounded-lg font-medium transition-colors inline-block text-center">
               View All Episodes
-            </button>
+            </Link>
           </div>
         </div>
       </section>

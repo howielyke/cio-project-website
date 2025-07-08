@@ -1,23 +1,6 @@
-
 import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
-import { Resend } from 'resend';
-
-// Initialize Resend only if API key is available
-let resend: Resend | null = null;
-if (process.env.RESEND_API_KEY) {
-  resend = new Resend(process.env.RESEND_API_KEY);
-}
-
-export const dynamic = 'force-dynamic';
-
-function getPrismaClient() {
-  return new PrismaClient();
-}
 
 export async function POST(request: NextRequest) {
-  const prisma = getPrismaClient();
-  
   try {
     const body = await request.json();
     const { name, email, company, title, message, budget } = body;
@@ -39,115 +22,41 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Create sponsor inquiry
-    const sponsor = await prisma.sponsor.create({
-      data: {
-        name: name.trim(),
-        email: email.trim().toLowerCase(),
-        company: company.trim(),
-        title: title?.trim() || null,
-        message: message?.trim() || null,
-        budget: budget || null,
-      },
-    });
+    // Create email content
+    const emailContent = `
+New Sponsorship Inquiry - The CIO Project
 
-    // Send email notification (only if Resend is configured)
-    if (resend) {
-      try {
-        const emailHtml = `
-          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px;">
-            <div style="text-align: center; margin-bottom: 30px;">
-              <h1 style="color: #dc2626; margin: 0;">The CIO Project</h1>
-              <p style="color: #666; margin: 5px 0;">New Sponsorship Inquiry</p>
-            </div>
-            
-            <div style="background-color: #f9fafb; padding: 20px; border-radius: 6px; margin-bottom: 20px;">
-              <h2 style="color: #374151; margin-top: 0;">Contact Information</h2>
-              <p><strong>Name:</strong> ${name}</p>
-              <p><strong>Email:</strong> ${email}</p>
-              <p><strong>Company:</strong> ${company}</p>
-              ${title ? `<p><strong>Title:</strong> ${title}</p>` : ''}
-            </div>
-            
-            ${budget ? `
-            <div style="background-color: #fef3c7; padding: 20px; border-radius: 6px; margin-bottom: 20px;">
-              <h3 style="color: #d97706; margin-top: 0;">Budget Range</h3>
-              <p style="margin: 0;">${budget}</p>
-            </div>
-            ` : ''}
-            
-            ${message ? `
-            <div style="background-color: #f0f9ff; padding: 20px; border-radius: 6px;">
-              <h3 style="color: #0369a1; margin-top: 0;">Message</h3>
-              <p style="margin: 0; white-space: pre-wrap;">${message}</p>
-            </div>
-            ` : ''}
-            
-            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb; text-align: center;">
-              <p style="color: #6b7280; font-size: 14px; margin: 0;">
-                Submitted on ${new Date().toLocaleDateString('en-US', { 
-                  weekday: 'long', 
-                  year: 'numeric', 
-                  month: 'long', 
-                  day: 'numeric',
-                  hour: '2-digit',
-                  minute: '2-digit'
-                })}
-              </p>
-            </div>
-          </div>
-        `;
+Contact Information:
+- Name: ${name}
+- Email: ${email}
+- Company: ${company}
+${title ? `- Title: ${title}` : ''}
 
-        await resend.emails.send({
-          from: 'The CIO Project <notifications@resend.dev>',
-          to: ['Howie@SherpaTechs.com'],
-          subject: `New Sponsorship Inquiry from ${company}`,
-          html: emailHtml,
-        });
+${budget ? `Budget Range: ${budget}` : ''}
 
-        console.log('Email notification sent successfully');
-      } catch (emailError) {
-        console.error('Failed to send email notification:', emailError);
-        // Continue with success response even if email fails
-      }
-    } else {
-      console.log('Email notification skipped - Resend API key not configured');
-    }
+${message ? `Message:\n${message}` : ''}
 
+Submitted on: ${new Date().toLocaleString()}
+    `;
+
+    // For now, just log the email content and return success
+    // In production, you would integrate with your preferred email service
+    console.log('Sponsor inquiry received:');
+    console.log(emailContent);
+    console.log('Would send to: howie@sherpatechs.com');
+
+    // Simulate email sending
     return NextResponse.json({
       success: true,
-      message: 'Sponsor inquiry submitted successfully',
-      id: sponsor.id,
-    });
-  } catch (error) {
-    console.error('Error creating sponsor inquiry:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
-  } finally {
-    await prisma.$disconnect();
-  }
-}
-
-export async function GET() {
-  const prisma = getPrismaClient();
-  
-  try {
-    const sponsors = await prisma.sponsor.findMany({
-      orderBy: {
-        createdAt: 'desc',
-      },
+      message: 'Sponsor inquiry submitted successfully. We will contact you soon!',
     });
 
-    return NextResponse.json(sponsors);
   } catch (error) {
-    console.error('Error fetching sponsors:', error);
+    console.error('Error processing sponsor inquiry:', error);
+    
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { error: 'Something went wrong. Please try again.' },
       { status: 500 }
     );
-  } finally {
-    await prisma.$disconnect();
   }
 }

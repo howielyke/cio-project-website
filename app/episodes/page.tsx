@@ -19,14 +19,24 @@ const episodes = [
   {
     id: '2',
     title: 'Episode 2: Vala Ashfar, Chief Evangelist Office, Salesforce',
-    description: 'Join us as we\'ll be diving into the state of the CIO market place, and of course, lots of REAL AI talk.',
+    description: 'Chief Digital Evangelist, Salesforce.com. Renowned Speaker, and Author of BOUNDLESS and his New BOOK publishing this October 2025, ZDNET Columnist, and weekly Podcast: DisrupTV, VALA AFSHAR, joins us today.',
     episodeNumber: 2,
-    youtubeId: undefined,
-    guests: ['Vala Ashfar'],
+    youtubeId: 'u517t9BrNQw',
+    guests: ['Vala Afshar', 'Brian Shield', 'Howie L Lyke'],
     publishedAt: new Date('2025-06-27'),
     showNotes: 'Join us for an exciting conversation with Vala Ashfar, Chief Evangelist Office at Salesforce. We\'ll explore the current state of the CIO marketplace and dive deep into real AI discussions that matter to technology leaders.',
   }
 ];
+
+const upcomingEpisode = {
+  id: '3',
+  title: 'Episode 3: Rob Stricklen, CEO and Founder of Move 37 Ventures LLC',
+  description: 'C-level executive for over 30 years in the high-tech arena, including: Apple & Honeywell; The Cable TV Industry, including: Continental Cablevision & The Weather Channel; Satellite TV & Delivery, including: Dish Network & Kymet; and Wireless Carriers, including: T-mobile, Leap Wireless/Cricket, Truconnect, Cape, Pronto and Karrier-One.',
+  episodeNumber: 3,
+  guests: ['Rob Stricklen'],
+  publishedAt: new Date('2025-06-13'),
+  showNotes: 'Join us for an exciting conversation with Rob Stricklen, CEO and Founder of Move 37 Ventures LLC, as he shares insights from his 30+ years of C-level executive experience across major tech companies.',
+};
 
 export default function EpisodesPage() {
   return (
@@ -61,13 +71,14 @@ export default function EpisodesPage() {
       <section className="py-16">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="space-y-8">
-            {/* Current Episode */}
+            {/* Available Episodes */}
             <div>
               <div className="flex items-center space-x-2 mb-6">
                 <div className="w-3 h-3 rounded-full bg-green-500"></div>
                 <h2 className="text-2xl font-bold text-gray-900">Available Now</h2>
               </div>
               <div className="grid gap-8">
+                <EpisodeCard episode={episodes[1]} featured={true} />
                 <EpisodeCard episode={episodes[0]} featured={true} />
               </div>
             </div>
@@ -79,13 +90,17 @@ export default function EpisodesPage() {
                 <h2 className="text-2xl font-bold text-gray-900">Coming Soon</h2>
               </div>
               <div className="grid gap-8">
-                <div className="relative">
-                  <EpisodeCard episode={episodes[1]} />
-                  {/* Coming Soon Overlay */}
-                  <div className="absolute inset-0 bg-amber-500/10 rounded-lg flex items-center justify-center">
-                    <div className="bg-amber-500 text-gray-900 px-6 py-3 rounded-full font-bold text-lg shadow-lg">
-                      <Calendar className="inline h-5 w-5 mr-2" />
-                      Releases Friday, June 27th
+                <div className="bg-gray-50 rounded-lg p-6 border-2 border-dashed border-gray-300">
+                  <div className="text-center space-y-4">
+                    <div className="w-12 h-12 mx-auto rounded-full bg-amber-500 flex items-center justify-center">
+                      <Calendar className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-semibold text-gray-900">{upcomingEpisode.title}</h4>
+                      <p className="text-gray-600 mt-2">{upcomingEpisode.description}</p>
+                      <p className="text-sm text-red-600 mt-3 font-medium">
+                        Releasing June 11-15th
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -101,12 +116,16 @@ export default function EpisodesPage() {
                   when new episodes are released.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-                  <Button className="bg-amber-500 hover:bg-amber-600 text-gray-900">
-                    Subscribe on Apple Podcasts
-                  </Button>
-                  <Button variant="outline" className="border-white text-white hover:bg-white hover:text-blue-900">
-                    Listen on Spotify
-                  </Button>
+                  <a href="https://podcasts.apple.com/us/podcast/the-cio-project/id1800079926" target="_blank" rel="noopener noreferrer">
+                    <Button className="bg-amber-500 hover:bg-amber-600 text-gray-900 w-full">
+                      Subscribe on Apple Podcasts
+                    </Button>
+                  </a>
+                  <a href="https://open.spotify.com/show/706zX0WbNnJuoyTcrLw59z?si=7da97599ad434e30" target="_blank" rel="noopener noreferrer">
+                    <Button className="bg-amber-500 hover:bg-amber-600 text-black w-full">
+                      Listen on Spotify
+                    </Button>
+                  </a>
                 </div>
               </div>
             </div>

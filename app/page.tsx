@@ -9,24 +9,24 @@ import Image from 'next/image';
 
 // Sample data - Updated with actual episode information
 const featuredEpisode = {
-  id: '1',
-  title: 'Episode 1: The CIO Journey - Leadership Lessons from the Trenches',
-  description: 'Join our inaugural episode as we dive deep into what it really means to be a Chief Information Officer in today\'s rapidly evolving tech landscape. Our hosts share their personal journeys, biggest challenges, and the unfiltered truths about leading technology organizations.',
-  episodeNumber: 1,
-  youtubeId: 'ARSzL4295lE', // Actual Episode 1 YouTube ID
-  guests: ['Howie L Lyke', 'Brian Shield'],
-  publishedAt: new Date('2025-06-15T12:00:00.000Z'),
-  showNotes: 'In this inaugural episode, we explore the evolving role of the CIO, discuss key leadership strategies, and share personal confessions about the challenges of driving digital transformation in large organizations. Real talk from real leaders.',
+  id: '2',
+  title: 'Episode 2: Vala Ashfar, Chief Evangelist Office, Salesforce',
+  description: 'Chief Digital Evangelist, Salesforce.com. Renowned Speaker, and Author of BOUNDLESS and his New BOOK publishing this October 2025, ZDNET Columnist, and weekly Podcast: DisrupTV, VALA AFSHAR, joins us today.',
+  episodeNumber: 2,
+  youtubeId: 'u517t9BrNQw', // Episode 2 YouTube ID
+  guests: ['Vala Afshar', 'Brian Shield', 'Howie L Lyke'],
+  publishedAt: new Date('2025-06-27T12:00:00.000Z'),
+  showNotes: 'Join us for an exciting conversation with Vala Ashfar, Chief Evangelist Office at Salesforce. We\'ll explore the current state of the CIO marketplace and dive deep into real AI discussions that matter to technology leaders.',
 };
 
 const upcomingEpisode = {
-  id: '2',
-  title: 'Episode 2: Vala Ashfar, Chief Evangelist Office, Salesforce',
-  description: 'Join us as we\'ll be diving into the state of the CIO market place, and of course, lots of REAL AI talk.',
-  episodeNumber: 2,
-  guests: ['Vala Ashfar'],
-  publishedAt: new Date('2025-06-27T12:00:00.000Z'),
-  showNotes: 'Join us for an exciting conversation with Vala Ashfar, Chief Evangelist Office at Salesforce. We\'ll explore the current state of the CIO marketplace and dive deep into real AI discussions that matter to technology leaders.',
+  id: '3',
+  title: 'Episode 3: Rob Stricklen, CEO and Founder of Move 37 Ventures LLC',
+  description: 'C-level executive for over 30 years in the high-tech arena, including: Apple & Honeywell; The Cable TV Industry, including: Continental Cablevision & The Weather Channel; Satellite TV & Delivery, including: Dish Network & Kymet; and Wireless Carriers, including: T-mobile, Leap Wireless/Cricket, Truconnect, Cape, Pronto and Karrier-One.',
+  episodeNumber: 3,
+  guests: ['Rob Stricklen'],
+  publishedAt: new Date('2025-06-13T12:00:00.000Z'),
+  showNotes: 'Join us for an exciting conversation with Rob Stricklen, CEO and Founder of Move 37 Ventures LLC, as he shares insights from his 30+ years of C-level executive experience across major tech companies.',
 };
 
 const hosts = [
@@ -180,7 +180,7 @@ export default function HomePage() {
                       <h4 className="text-lg font-semibold text-gray-900">{upcomingEpisode.title}</h4>
                       <p className="text-gray-600 mt-2">{upcomingEpisode.description}</p>
                       <p className="text-sm text-red-600 mt-3 font-medium">
-                        Releasing Friday, June 27th
+                        Releasing June 11-15th
                       </p>
                     </div>
                   </div>
@@ -287,7 +287,7 @@ export default function HomePage() {
               Subscribe to Podcast
             </Button>
             <Link href="/sponsors">
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-red-600 px-8 py-4">
+              <Button size="lg" className="show-trailer-highlight text-amber-400 font-semibold px-8 py-4">
                 Partner with Us
               </Button>
             </Link>
