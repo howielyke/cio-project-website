@@ -1,4 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { Resend } from 'resend';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: NextRequest) {
   try {
@@ -56,13 +59,14 @@ ${message}
 Submitted on: ${new Date().toLocaleString()}
     `;
 
-    // For now, just log the email content and return success
-    // In production, you would integrate with your preferred email service
-    console.log('Audience inquiry received:');
-    console.log(emailContent);
-    console.log('Would send to: howie@sherpatechs.com');
+    // Send email using Resend
+    await resend.emails.send({
+      from: 'The CIO Project <onboarding@resend.dev>',
+      to: ['howie@sherpatechs.com'],
+      subject: `New Audience ${inquiryLabel} from ${name}`,
+      text: emailContent,
+    });
 
-    // Simulate email sending
     return NextResponse.json({
       success: true,
       message: 'Inquiry submitted successfully. We will get back to you soon!',
